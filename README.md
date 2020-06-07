@@ -27,6 +27,9 @@ rails g model Notebox title:string text:string creation_date:datetime position:i
 rails g scaffold bbox_Content text:string insertion_date:datetime completion_date:datetime due_date:datetime completed:boolean pinned:boolean pass_counter:integer bbox:references
 
 rake db:migrate
+rake # runs rspec to see if everything ok with db
+
+# adjust models in ./app/models
 
 rails g devise:install
 
