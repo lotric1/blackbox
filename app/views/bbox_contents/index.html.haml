@@ -1,0 +1,30 @@
+%p#notice= notice
+%h1 Bbox Contents
+%table
+  %thead
+    %tr
+      %th Text
+      %th Insertion date
+      %th Completion date
+      %th Due date
+      %th Completed
+      %th Pinned
+      %th Pass counter
+      %th Bbox
+      %th{:colspan => "3"}
+  %tbody
+    - @bbox_contents.each do |bbox_content|
+      %tr
+        %td= bbox_content.text
+        %td= bbox_content.insertion_date
+        %td= bbox_content.completion_date
+        %td= bbox_content.due_date
+        %td= bbox_content.completed
+        %td= bbox_content.pinned
+        %td= bbox_content.pass_counter
+        %td= bbox_content.bbox_id
+        %td= link_to 'Show', bbox_content
+        %td= link_to 'Edit', edit_bbox_content_path(bbox_content)
+        %td= link_to 'Destroy', bbox_content, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Bbox Content', new_bbox_content_path

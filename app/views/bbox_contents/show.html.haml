@@ -1,0 +1,28 @@
+%p#notice= notice
+%p
+  %strong Text:
+  = @bbox_content.text
+%p
+  %strong Insertion date:
+  = @bbox_content.insertion_date
+%p
+  %strong Completion date:
+  = @bbox_content.completion_date
+%p
+  %strong Due date:
+  = @bbox_content.due_date
+%p
+  %strong Completed:
+  = @bbox_content.completed
+%p
+  %strong Pinned:
+  = @bbox_content.pinned
+%p
+  %strong Pass counter:
+  = @bbox_content.pass_counter
+%p
+  %strong Bbox:
+  = @bbox_content.bbox_id
+= link_to 'Edit', edit_bbox_content_path(@bbox_content)
+|
+= link_to 'Back', bbox_contents_path

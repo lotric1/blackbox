@@ -1,0 +1,2 @@
+class BlackboxController < ApplicationController
+end

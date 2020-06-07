@@ -45,6 +45,7 @@ group :development do
   gem 'bootstrap'
   gem 'sassc'
   gem 'jquery'
+  gem 'devise'
 end
 
 group :test do

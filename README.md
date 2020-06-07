@@ -29,12 +29,22 @@ rails g scaffold bbox_Content text:string insertion_date:datetime completion_dat
 rake db:migrate
 rake # runs rspec to see if everything ok with db
 
-# adjust models in ./app/models
+# adjust models in ./app/models to define has_many relations
+
+rails g controller blackbox
+
+# change ./config/routes.rb, adding root to: "blackbox#index"
+# add an index.html.haml to ./views/blackbox, type anything there, this will be your index page
 
 rails g devise:install
+PS: this is how you do step 3 in haml
+    %p#notice
+      = notice
+    %p#alert
+      = alert
 
 rails g devise:views
-rake haml:replace_erbs
+rake haml:replace_erbs # yes, again
 
 rails g devise user
 rake db:migrate
