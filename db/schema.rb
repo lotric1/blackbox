@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_014411) do
+ActiveRecord::Schema.define(version: 2020_06_07_014804) do
 
   create_table "bbox_contents", force: :cascade do |t|
     t.string "text"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_06_07_014411) do
     t.string "color"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_bboxes_on_user_id"
   end
 
   create_table "noteboxes", force: :cascade do |t|
@@ -46,6 +48,8 @@ ActiveRecord::Schema.define(version: 2020_06_07_014411) do
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_noteboxes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,4 +66,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_014411) do
 
   add_foreign_key "bbox_contents", "bboxes"
   add_foreign_key "bbox_contents", "users"
+  add_foreign_key "bboxes", "users"
+  add_foreign_key "noteboxes", "users"
 end
