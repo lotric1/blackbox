@@ -14,17 +14,19 @@ rails new blackbox
 # edit gemfile, then
 bundle install
 
-gem install rake
 rake haml:replace_erbs
 
 rails g rspec:install
 
 # model because we are not going to display a page for the box
 rails g model bbox title:string creation_date:datetime position:integer items_per_day:integer starred:boolean color:string
+
 rails g model Notebox title:string text:string creation_date:datetime position:integer
 
 # scaffold because we want a page with all the content
 rails g scaffold bbox_Content text:string insertion_date:datetime completion_date:datetime due_date:datetime completed:boolean pinned:boolean pass_counter:integer bbox:references
+
+rake db:migrate
 
 rails g devise:install
 

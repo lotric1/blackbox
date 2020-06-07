@@ -1,0 +1,2 @@
+class Notebox < ApplicationRecord
+end

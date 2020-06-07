@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bbox Contents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Insertion date</th>
+      <th>Completion date</th>
+      <th>Due date</th>
+      <th>Completed</th>
+      <th>Pinned</th>
+      <th>Pass counter</th>
+      <th>Bbox</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bbox_contents.each do |bbox_content| %>
+      <tr>
+        <td><%= bbox_content.text %></td>
+        <td><%= bbox_content.insertion_date %></td>
+        <td><%= bbox_content.completion_date %></td>
+        <td><%= bbox_content.due_date %></td>
+        <td><%= bbox_content.completed %></td>
+        <td><%= bbox_content.pinned %></td>
+        <td><%= bbox_content.pass_counter %></td>
+        <td><%= bbox_content.bbox_id %></td>
+        <td><%= link_to 'Show', bbox_content %></td>
+        <td><%= link_to 'Edit', edit_bbox_content_path(bbox_content) %></td>
+        <td><%= link_to 'Destroy', bbox_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bbox Content', new_bbox_content_path %>

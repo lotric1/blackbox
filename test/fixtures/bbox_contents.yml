@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  insertion_date: 2020-06-06 21:02:30
+  completion_date: 2020-06-06 21:02:30
+  due_date: 2020-06-06 21:02:30
+  completed: false
+  pinned: false
+  pass_counter: 1
+  bbox: one
+
+two:
+  text: MyString
+  insertion_date: 2020-06-06 21:02:30
+  completion_date: 2020-06-06 21:02:30
+  due_date: 2020-06-06 21:02:30
+  completed: false
+  pinned: false
+  pass_counter: 1
+  bbox: two
