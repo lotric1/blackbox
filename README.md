@@ -4,7 +4,7 @@
 - Atividades que não são explicitamente ignoradas continuam aparecendo no próximo dia.
 - Uma das páginas mostra a tabela completa com todas as atividades.
 - Para cada caixa, o número de atividades por dia pode ser configurado.
-- Você pode ter mais de uma caixa preta contendo listas de atividades. Desse jeito, é possível organizar as tarefas relacionadas a trabalho, escola, etc.
+- Você pode ter mais de uma caixa preta contendo listas de atividades. Desse jeito, é possível organizar as tarefas relacionadas a trabalho, escola, etc. A ideia é ter uma espécie de dashboard onde tudo é visualmente fácil de encontrar.
 - O conteúdo da caixa não precisa ser somente tarefas. Pode também ser links
 - Você pode pedir mais atividades para a caixa.
 - A função de caixa preta pode ser desabilitada, de forma a ter uma caixa contendo listas de atividades que são prioridade no momento.
@@ -89,6 +89,7 @@ PS: this is how you do step 3 in haml
     %p#alert
       = alert
 
+# Authentication
 rails g devise:views
 rake haml:replace_erbs # yes, again
 
@@ -103,5 +104,18 @@ def set_locale
 I18n.locale = params[:locale] || I18n.default_locale
 end
 
+rails g migration add_user_ref_to_bbox_content user:references
+rake db:migrate
+
+# add :confirmable to ./app/models/user.rb
+# then:
+rails g migration add_confirmable_to_devise
+
+# See later the rest of the email stuff at Roteiro4 professor's page
 
 ``` 
+
+## Outras coisas
+
+- Recomeçar o db com algumas coisas novas: `rake db:drop`
+- Repopular o banco com base nos comandos em db/seeds.rb: `rake db:seed`

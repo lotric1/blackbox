@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_012558) do
+ActiveRecord::Schema.define(version: 2020_06_07_014411) do
 
   create_table "bbox_contents", force: :cascade do |t|
     t.string "text"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 2020_06_07_012558) do
     t.integer "bbox_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
     t.index ["bbox_id"], name: "index_bbox_contents_on_bbox_id"
+    t.index ["user_id"], name: "index_bbox_contents_on_user_id"
   end
 
   create_table "bboxes", force: :cascade do |t|
@@ -59,4 +61,5 @@ ActiveRecord::Schema.define(version: 2020_06_07_012558) do
   end
 
   add_foreign_key "bbox_contents", "bboxes"
+  add_foreign_key "bbox_contents", "users"
 end
