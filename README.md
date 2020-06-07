@@ -46,7 +46,6 @@
 ## TODO
 
 - Nome
-    - Something similar to procrasturbator, but not lewd. Maybe procrastinator.
     - Blackbox, blackblocks, but it's the name of an antifascist organization, which i respect, but don't want to name it as something that already represents something else)
     - Backburner
 
@@ -113,9 +112,12 @@ rails g migration add_confirmable_to_devise
 
 # See later the rest of the email stuff at Roteiro4 professor's page
 
+rails g controller bbox
+
 ``` 
 
 ## Outras coisas
 
+- Ver projeto: bin/rails server, acessa localhost:3000
 - Recomeçar o db com algumas coisas novas: `rake db:drop`
 - Repopular o banco com base nos comandos em db/seeds.rb: `rake db:seed`

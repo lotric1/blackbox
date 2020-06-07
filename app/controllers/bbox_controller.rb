@@ -1,0 +1,2 @@
+class BboxController < ApplicationController
+end
