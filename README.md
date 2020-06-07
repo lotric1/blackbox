@@ -6,6 +6,52 @@
 - Para cada caixa, o número de atividades por dia pode ser configurado.
 - Você pode ter mais de uma caixa preta contendo listas de atividades. Desse jeito, é possível organizar as tarefas relacionadas a trabalho, escola, etc.
 - O conteúdo da caixa não precisa ser somente tarefas. Pode também ser links
+- Você pode pedir mais atividades para a caixa.
+- A função de caixa preta pode ser desabilitada, de forma a ter uma caixa contendo listas de atividades que são prioridade no momento.
+- Uma tarefa pode ser marcada com uma estrela de forma que ela sempre apareça
+- Você pode colocar prazos para as tarefas de forma que elas sempre apareçam faltando 7 dias.
+
+## Modelos
+
+- bbox: bloco com função de caixa preta
+  - title: título
+  - creation_date: data de criação
+  - position: posição na página
+  - items_per_day: número de items a serem mostrados por dia
+  - starred: desabilita função caixa preta, mostrando todos os itens. A ideia é colocar itens urgentes aqui.
+  - color: cor da caixa dentre possibilidades predefinidas
+
+- Notebox: bloco contendo uma anotação
+  - title: título
+  - text: conteúdo
+  - creation_date: data de criação
+  - position: posição na página
+ 
+- bbox_Content: tabela de atividades
+  - text: conteúdo
+  - insertion_date: data de inserção
+  - completion_date: data em que foi completada
+  - due_date: prazo
+  - completed: se a atividade foi completada ou não
+  - pinned: se a atividade deve aparecer todo dia até ser completa
+  - pass_counter: quantas vezes a atividade foi passada desde sua criação, usado para calcular a próxima vez que ela aparece
+  - bbox: caixa à que a atividade pertence
+
+## Outros escopos possíveis para o projeto
+
+- Dashboard: fora as caixas pretas, posso incluir outras caixas com outras funcionalidades. Ex: sticky notes, imagens, quotes aleatórios.
+- Caixas de repetição espaçada, similar ao anki. Digite uma palavra e escolha uma definição dentre as que o app gera ou insira sua própria. A inserção e gerenciamendo dos cards é feita em outra página mas o conteúdo pode ser acessado num bloco da paǵina principal.
+
+
+## TODO
+
+- Nome
+    - Something similar to procrasturbator, but not lewd. Maybe procrastinator.
+    - Blackbox, blackblocks, but it's the name of an antifascist organization, which i respect, but don't want to name it as something that already represents something else)
+    - Backburner
+
+
+## Passos
 
 ```
 sudo gem install bundle rake rails
@@ -33,7 +79,7 @@ rake # runs rspec to see if everything ok with db
 
 rails g controller blackbox
 
-# change ./config/routes.rb, adding root to: "blackbox#index"
+# change .app/config/routes.rb, adding root to: "blackbox#index"
 # add an index.html.haml to ./views/blackbox, type anything there, this will be your index page
 
 rails g devise:install
@@ -48,25 +94,14 @@ rake haml:replace_erbs # yes, again
 
 rails g devise user
 rake db:migrate
+
+# in .app/controllers/application_controller.rb, add:
+protect_from_forgery with: :exception
+before_action :set_locale
+before_action :authenticate_user!
+def set_locale
+I18n.locale = params[:locale] || I18n.default_locale
+end
+
+
 ``` 
-
-## Funcionalidades que podem ser implementadas:
-
-- A função de caixa preta pode ser desabilitada, de forma a ter uma caixa contendo listas de atividades que são prioridade no momento.
-- Você pode pedir mais atividades para a caixa.
-- Uma tarefa pode ser marcada com uma estrela de forma que ela sempre apareça
-- Você pode colocar prazos para as tarefas de forma que elas sempre apareçam faltando 7 dias.
-
-## Outros escopos possíveis para o projeto
-
-- Dashboard: fora as caixas pretas, posso incluir outras caixas com outras funcionalidades. Ex: sticky notes, imagens, quotes aleatórios.
-- Caixas de repetição espaçada, similar ao anki. Digite uma palavra e escolha uma definição dentre as que o app gera ou insira sua própria.
-
-
-## TODO
-
-- Nome
-    - Something similar to procrasturbator, but not lewd. Maybe procrastinator.
-    - Blackbox, blackblocks, but it's the name of an antifascist organization (which i respect, but don't want to name it as something that already represents something else)
-    - Backburner
-- 
