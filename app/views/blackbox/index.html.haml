@@ -1,2 +1,11 @@
 %h1 Blackbox
 %p= link_to 'Activities', bbox_contents_path
+%div#container
+    %div#row
+        - @bboxes.each do |bbox|
+            %div#card
+                %div#card-body
+                    %h5#card-title= bbox.title
+                    %ul#list-group.list-group-flush
+                        - contents(bbox).each do |content|
+                            %li#list-group-item= content.content
