@@ -121,3 +121,5 @@ rails g controller bbox
 - Ver projeto: bin/rails server, acessa localhost:3000
 - Recomeçar o db com algumas coisas novas: `rake db:drop`
 - Repopular o banco com base nos comandos em db/seeds.rb: `rake db:seed`
+- logins:
+  - admin@admin.com admin1
