@@ -13,7 +13,7 @@
       %th Bbox
       %th{:colspan => "3"}
   %tbody
-    - @bbox_contents.each do |bbox_content|
+    - contents.each do |bbox_content|
       %tr
         %td= bbox_content.text
         %td= bbox_content.insertion_date

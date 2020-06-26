@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @bbox.title
+%p
+  %strong Creation date:
+  = @bbox.creation_date
+%p
+  %strong Position:
+  = @bbox.position
+%p
+  %strong Items per day:
+  = @bbox.items_per_day
+%p
+  %strong Starred:
+  = @bbox.starred
+%p
+  %strong Color:
+  = @bbox.color
+= link_to 'Edit', edit_bbox_path(@bbox)
+|
+= link_to 'Back', bboxes_path

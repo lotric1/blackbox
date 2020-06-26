@@ -11,25 +11,6 @@
     = form.label :text
     = form.text_field :text
   .field
-    = form.label :insertion_date
-    = form.datetime_select :insertion_date
-  .field
-    = form.label :completion_date
-    = form.datetime_select :completion_date
-  .field
-    = form.label :due_date
-    = form.datetime_select :due_date
-  .field
-    = form.label :completed
-    = form.check_box :completed
-  .field
-    = form.label :pinned
-    = form.check_box :pinned
-  .field
-    = form.label :pass_counter
-    = form.number_field :pass_counter
-  .field
-    = form.label :bbox_id
-    = form.text_field :bbox_id
+    = form.hidden_field :bbox_id, value: bbox_id
   .actions
     = form.submit

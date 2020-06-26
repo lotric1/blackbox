@@ -1,11 +1,15 @@
 %h1 Blackbox
 %p= link_to 'Activities', bbox_contents_path
 %div#container
-    %div#row
+    %div#card-group
         - @bboxes.each do |bbox|
             %div#card
                 %div#card-body
                     %h5#card-title= bbox.title
                     %ul#list-group.list-group-flush
                         - contents(bbox).each do |content|
-                            %li#list-group-item= content.content
+                            %li#list-group-item= content.text
+                        %div#form= render 'bbox_contents/form', bbox_id: bbox.id, bbox_content: BboxContent.new
+                    #btn= link_to 'Edit', edit_bbox_path(bbox)
+                    #btn= link_to 'Destroy', bbox, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to 'New Bbox', new_bbox_path

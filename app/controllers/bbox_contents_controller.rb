@@ -1,5 +1,6 @@
 class BboxContentsController < ApplicationController
   before_action :set_bbox_content, only: [:show, :edit, :update, :destroy]
+  helper_method :contents
 
   # GET /bbox_contents
   # GET /bbox_contents.json
@@ -16,25 +17,33 @@ class BboxContentsController < ApplicationController
   def new
     @bbox_content = BboxContent.new
   end
-
+  
   # GET /bbox_contents/1/edit
   def edit
   end
-
+  
   # POST /bbox_contents
   # POST /bbox_contents.json
   def create
     @bbox_content = BboxContent.new(bbox_content_params)
-
-    respond_to do |format|
-      if @bbox_content.save
-        format.html { redirect_to @bbox_content, notice: 'Bbox content was successfully created.' }
-        format.json { render :show, status: :created, location: @bbox_content }
-      else
-        format.html { render :new }
-        format.json { render json: @bbox_content.errors, status: :unprocessable_entity }
-      end
-    end
+    @bbox_content.user_id = current_user.id
+    @bbox_content.insertion_date = Time.now()
+    @bbox_content.completed = 0
+    @bbox_content.pinned = 0
+    @bbox_content.pass_counter = 0
+    @bbox_content.due_date = @bbox_content.insertion_date
+    
+    #if @bbox_content.save
+    @bbox_content.save
+    redirect_back(fallback_location: root_path)
+    #respond_to do |format|
+        #format.html { redirect_to @bbox_content, notice: 'Bbox content was successfully created.' }
+        #format.json { render :show, status: :created, location: @bbox_content }
+     # else
+     #   format.html { render :new }
+     #   format.json { render json: @bbox_content.errors, status: :unprocessable_entity }
+     # end
+    #end
   end
 
   # PATCH/PUT /bbox_contents/1
@@ -61,6 +70,10 @@ class BboxContentsController < ApplicationController
     end
   end
 
+  def contents
+    return BboxContent.where(user_id: current_user.id).order(:completed, :bbox_id, :pinned, :due_date)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bbox_content
@@ -69,6 +82,6 @@ class BboxContentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bbox_content_params
-      params.require(:bbox_content).permit(:text, :insertion_date, :completion_date, :due_date, :completed, :pinned, :pass_counter, :bbox_id)
+      params.require(:bbox_content).permit(:text, :bbox_id)
     end
 end

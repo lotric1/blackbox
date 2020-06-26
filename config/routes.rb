@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bboxes
   devise_for :users
   resources :bbox_contents
   root to: "blackbox#index"

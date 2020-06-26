@@ -1,0 +1,26 @@
+%p#notice= notice
+%h1 Bboxes
+%table
+  %thead
+    %tr
+      %th Title
+      %th Creation date
+      %th Position
+      %th Items per day
+      %th Starred
+      %th Color
+      %th{:colspan => "3"}
+  %tbody
+    - @bboxes.each do |bbox|
+      %tr
+        %td= bbox.title
+        %td= bbox.creation_date
+        %td= bbox.position
+        %td= bbox.items_per_day
+        %td= bbox.starred
+        %td= bbox.color
+        %td= link_to 'Show', bbox
+        %td= link_to 'Edit', edit_bbox_path(bbox)
+        %td= link_to 'Destroy', bbox, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Bbox', new_bbox_path
