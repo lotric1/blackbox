@@ -1,5 +1,5 @@
 class BboxContentsController < ApplicationController
-  before_action :set_bbox_content, only: [:show, :edit, :update, :destroy, :pass, :flip_pinned]
+  before_action :set_bbox_content, only: [:show, :edit, :update, :destroy, :pass, :flip_pinned, :flip_completed]
   helper_method :contents
 
   # GET /bbox_contents
@@ -77,6 +77,19 @@ class BboxContentsController < ApplicationController
 
   def flip_pinned
     @bbox_content.pinned = ! @bbox_content.pinned
+    if @bbox_content.save()
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def flip_completed
+    if @bbox_content.completed
+      @bbox_content.completed = false
+      @bbox_content.completion_date = nil
+    else
+      @bbox_content.completed = true
+      @bbox_content.completion_date = Time.now()
+    end
     if @bbox_content.save()
       redirect_back(fallback_location: root_path)
     end

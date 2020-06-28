@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       post :pass
       post :flip_pinned
+      post :flip_completed
     end
   end
   root to: "blackbox#index"

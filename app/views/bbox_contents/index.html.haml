@@ -25,6 +25,15 @@
         %td= bbox_content.pinned
         %td= bbox_content.pass_counter
         %td= bbox_content.bbox_id
+        - if bbox_content.completed
+          %td= button_to 'Remove completion', flip_completed_bbox_content_path(bbox_content), method: :post, class: 'btn'
+        - else
+          %td= button_to 'Complete', flip_completed_bbox_content_path(bbox_content), method: :post, class: 'btn'
+        %td= button_to 'Pass', pass_bbox_content_path(bbox_content), method: :post, class: 'btn'
+        - if bbox_content.pinned
+          %td= button_to 'Remove pin', flip_pinned_bbox_content_path(bbox_content), method: :post, class: 'btn'
+        - else
+          %td= button_to 'Pin', flip_pinned_bbox_content_path(bbox_content), method: :post, class: 'btn'
         %td= link_to 'Show', bbox_content
         %td= link_to 'Edit', edit_bbox_content_path(bbox_content)
         %td= link_to 'Destroy', bbox_content, method: :delete, data: { confirm: 'Are you sure?' }
