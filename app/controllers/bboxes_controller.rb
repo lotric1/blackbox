@@ -4,7 +4,6 @@ class BboxesController < ApplicationController
   # GET /bboxes
   # GET /bboxes.json
   def index
-    @bboxes = Bbox.all
   end
 
   # GET /bboxes/1

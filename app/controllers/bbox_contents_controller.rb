@@ -5,7 +5,6 @@ class BboxContentsController < ApplicationController
   # GET /bbox_contents
   # GET /bbox_contents.json
   def index
-    @bbox_contents = BboxContent.all
   end
 
   # GET /bbox_contents/1
@@ -70,7 +69,7 @@ class BboxContentsController < ApplicationController
     end
   end
 
-  def contents
+  def contents # to display on list of activities
     return BboxContent.where(user_id: current_user.id).order(:completed, :bbox_id, :pinned, :next_date)
   end
 
