@@ -18,7 +18,7 @@
 
 ## Utilização
 
-- Acessar o projeto: `bin/rails server`, acesse `localhost:3000` no navegador.
-- logins já existentes:
+- Acessar o projeto: execute `bin/rails server`, acesse `localhost:3000` no navegador.
+- Logins já existentes:
   - admin@admin.com admin1
   - admin2@admin.com admin2
