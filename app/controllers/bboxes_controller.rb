@@ -66,7 +66,12 @@ class BboxesController < ApplicationController
 
   def flip_starred
     @bbox.starred = ! @bbox.starred
-    @bbox.save()
+    if @bbox.save()
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.json { head :no_content }
+      end
+    end
   end
 
   private

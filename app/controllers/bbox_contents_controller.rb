@@ -87,7 +87,12 @@ class BboxContentsController < ApplicationController
 
   def flip_pinned
     @bbox_content.pinned = ! @bbox_content.pinned
-    @bbox_content.save()
+    if @bbox_content.save()
+      respond_to do |format|
+        format.html { redirect_to root_path}
+        format.json { head :no_content }
+      end
+    end
   end
 
   private

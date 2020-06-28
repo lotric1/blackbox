@@ -20,7 +20,8 @@
                                 - if content.pass_counter == 0
                                     %small.new-content{style: 'color: green;'} new
                                 %div#btn-group
-                                    = button_to 'Pass', pass_bbox_content_path(content), method: :post, class: 'btn'
+                                    - if bbox.starred
+                                        = button_to 'Pass', pass_bbox_content_path(content), method: :post, class: 'btn'
                                     - if content.pinned
                                         = button_to 'Remove pin', flip_pinned_bbox_content_path(content), method: :post, class: 'btn'
                                     - else
