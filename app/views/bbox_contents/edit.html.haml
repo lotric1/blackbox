@@ -1,5 +1,5 @@
 %h1 Editing Bbox Content
-= render 'form', bbox_content: @bbox_content
+= render 'form', bbox_content: @bbox_content, bbox_id: @bbox_content.bbox_id
 = link_to 'Show', @bbox_content
 |
 = link_to 'Back', bbox_contents_path

@@ -48,24 +48,16 @@ class BboxContentsController < ApplicationController
   # PATCH/PUT /bbox_contents/1
   # PATCH/PUT /bbox_contents/1.json
   def update
-    respond_to do |format|
-      if @bbox_content.update(bbox_content_params)
-        format.html { redirect_to @bbox_content, notice: 'Bbox content was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bbox_content }
-      else
-        format.html { render :edit }
-        format.json { render json: @bbox_content.errors, status: :unprocessable_entity }
-      end
+    if @bbox_content.update(bbox_content_params)
+      redirect_back(fallback_location: root_path)
     end
   end
 
   # DELETE /bbox_contents/1
   # DELETE /bbox_contents/1.json
   def destroy
-    @bbox_content.destroy
-    respond_to do |format|
-      format.html { redirect_to bbox_contents_url, notice: 'Bbox content was successfully destroyed.' }
-      format.json { head :no_content }
+    if @bbox_content.destroy
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -78,20 +70,15 @@ class BboxContentsController < ApplicationController
     n = [intervals.length - 1, @bbox_content.pass_counter].min
     @bbox_content.next_date += intervals[n] * 86400 # 86400 seconds = 1 day
     @bbox_content.pass_counter += 1
-    @bbox_content.save()
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Passed ' + @bbox_content.text }
-      format.json { head :no_content }
+    if @bbox_content.save()
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def flip_pinned
     @bbox_content.pinned = ! @bbox_content.pinned
     if @bbox_content.save()
-      respond_to do |format|
-        format.html { redirect_to root_path}
-        format.json { head :no_content }
-      end
+      redirect_back(fallback_location: root_path)
     end
   end
 

@@ -1,4 +1,5 @@
 %h1 Blackbox
+%p= link_to 'Logout', destroy_user_session_path, method: :delete
 %p= link_to 'Activities', bbox_contents_path
 %p= link_to 'Boxes', bboxes_path
 %div#container
@@ -20,12 +21,13 @@
                                 - if content.pass_counter == 0
                                     %small.new-content{style: 'color: green;'} new
                                 %div#btn-group
-                                    - if bbox.starred
+                                    - if ! bbox.starred
                                         = button_to 'Pass', pass_bbox_content_path(content), method: :post, class: 'btn'
                                     - if content.pinned
                                         = button_to 'Remove pin', flip_pinned_bbox_content_path(content), method: :post, class: 'btn'
                                     - else
                                         = button_to 'Pin', flip_pinned_bbox_content_path(content), method: :post, class: 'btn'
+                                    = button_to 'Delete', bbox_content_path(content), method: :delete, class: 'btn'
                         %div#form= render 'bbox_contents/form', bbox_id: bbox.id, bbox_content: BboxContent.new
                     %div#btn-group
                         = link_to 'Edit', edit_bbox_path(bbox), class:'btn'

@@ -11,7 +11,7 @@
       %th Color
       %th{:colspan => "3"}
   %tbody
-    - @bboxes.each do |bbox|
+    - boxes().each do |bbox|
       %tr
         %td= bbox.title
         %td= bbox.creation_date

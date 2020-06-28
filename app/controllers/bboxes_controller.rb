@@ -1,5 +1,6 @@
 class BboxesController < ApplicationController
   before_action :set_bbox, only: [:show, :edit, :update, :destroy, :flip_starred]
+  helper_method :boxes
 
   # GET /bboxes
   # GET /bboxes.json
@@ -28,50 +29,42 @@ class BboxesController < ApplicationController
     @bbox.creation_date = Time.now()
     @bbox.starred = 0
     @bbox.color = "#000000"
-    @bbox.position = BboxContent.where(user_id: current_user.id).length()
-    respond_to do |format|
-      if @bbox.save
-        format.html { redirect_to @bbox, notice: 'Bbox was successfully created.' }
-        format.json { render :show, status: :created, location: @bbox }
-      else
-        format.html { render :new }
-        format.json { render json: @bbox.errors, status: :unprocessable_entity }
-      end
+    @bbox.position = boxes().where(user_id: current_user.id).length()
+    if @bbox.save
+      redirect_back(fallback_location: root_path)
     end
   end
 
   # PATCH/PUT /bboxes/1
   # PATCH/PUT /bboxes/1.json
   def update
-    respond_to do |format|
-      if @bbox.update(bbox_params)
-        format.html { redirect_to @bbox, notice: 'Bbox was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bbox }
-      else
-        format.html { render :edit }
-        format.json { render json: @bbox.errors, status: :unprocessable_entity }
-      end
+    redirect_back(fallback_location: root_path)
+    if @bbox.update(bbox_params)
+      redirect_back(fallback_location: root_path)
     end
   end
 
   # DELETE /bboxes/1
   # DELETE /bboxes/1.json
   def destroy
-    @bbox.destroy
-    respond_to do |format|
-      format.html { redirect_to bboxes_url, notice: 'Bbox was successfully destroyed.' }
-      format.json { head :no_content }
+    # Destroy all contents of bbox
+    BboxContent.where(user_id: current_user.id, bbox_id: @bbox.id).each do |content|
+      content.destroy()
+    end
+    if @bbox.destroy
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def flip_starred
     @bbox.starred = ! @bbox.starred
     if @bbox.save()
-      respond_to do |format|
-        format.html { redirect_to root_path }
-        format.json { head :no_content }
-      end
+      redirect_back(fallback_location: root_path)
     end
+  end
+
+  def boxes
+    return Bbox.where(user_id: current_user.id).order(:position)
   end
 
   private

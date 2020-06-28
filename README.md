@@ -123,3 +123,4 @@ rails g controller bbox
 - Repopular o banco com base nos comandos em db/seeds.rb: `rake db:seed`
 - logins:
   - admin@admin.com admin1
+  - admin2@admin.com admin2
