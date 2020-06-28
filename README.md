@@ -4,7 +4,7 @@
 
 - Ideia principal: inserir coisas que você quer fazer. Após a inserção, é como uma caixa preta. Todo dia, três atividades são escolhidas. Você pode completá-las ou ignorá-las. Ignorando-as, elas aparecem somente após um certo número de dias. Quanto mais você ignora uma atividade, maior o intervalo até ela reaparecer.
 - Atividades que não são explicitamente ignoradas continuam aparecendo no próximo dia.
-- Uma das páginas mostra a tabela completa com todas as atividades.
+- Uma das páginas mostra a tabela completa com todas as atividades, incluindo as completadas e as que estão pro vir.
 - Para cada caixa, o número de atividades por dia pode ser configurado.
 - Você pode ter mais de uma caixa preta contendo listas de atividades. Desse jeito, é possível organizar as tarefas relacionadas a trabalho, escola, etc. A ideia é ter uma espécie de dashboard onde tudo é visualmente fácil de encontrar.
 - O conteúdo da caixa não precisa ser somente tarefas. Pode também ser links ou anotações para lembrar depois.
