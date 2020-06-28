@@ -9,6 +9,7 @@
                     %ul#list-group.list-group-flush
                         - contents(bbox).each do |content|
                             %li#list-group-item= content.text
+                            = button_to 'Pass', pass_bbox_content_path(content), method: :post, class: 'btn'
                         %div#form= render 'bbox_contents/form', bbox_id: bbox.id, bbox_content: BboxContent.new
                     #btn= link_to 'Edit', edit_bbox_path(bbox)
                     #btn= link_to 'Destroy', bbox, method: :delete, data: { confirm: 'Are you sure?' }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_203621) do
+ActiveRecord::Schema.define(version: 2020_06_27_225853) do
 
   create_table "bbox_contents", force: :cascade do |t|
     t.string "text"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_203621) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
+    t.datetime "next_date"
     t.index ["bbox_id"], name: "index_bbox_contents_on_bbox_id"
     t.index ["user_id"], name: "index_bbox_contents_on_user_id"
   end

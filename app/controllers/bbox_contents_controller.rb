@@ -1,5 +1,5 @@
 class BboxContentsController < ApplicationController
-  before_action :set_bbox_content, only: [:show, :edit, :update, :destroy]
+  before_action :set_bbox_content, only: [:show, :edit, :update, :destroy, :pass]
   helper_method :contents
 
   # GET /bbox_contents
@@ -28,10 +28,10 @@ class BboxContentsController < ApplicationController
     @bbox_content = BboxContent.new(bbox_content_params)
     @bbox_content.user_id = current_user.id
     @bbox_content.insertion_date = Time.now()
-    @bbox_content.completed = 0
-    @bbox_content.pinned = 0
+    @bbox_content.completed = false
+    @bbox_content.pinned = false
     @bbox_content.pass_counter = 0
-    @bbox_content.due_date = @bbox_content.insertion_date
+    @bbox_content.next_date =  @bbox_content.insertion_date
     
     #if @bbox_content.save
     @bbox_content.save
@@ -71,7 +71,19 @@ class BboxContentsController < ApplicationController
   end
 
   def contents
-    return BboxContent.where(user_id: current_user.id).order(:completed, :bbox_id, :pinned, :due_date)
+    return BboxContent.where(user_id: current_user.id).order(:completed, :bbox_id, :pinned, :next_date)
+  end
+
+  def pass
+    intervals = [1, 4, 10, 20, 40, 80, 160] # days
+    n = [intervals.length - 1, @bbox_content.pass_counter].min
+    @bbox_content.next_date += intervals[n] * 86400 # 86400 seconds = 1 day
+    @bbox_content.pass_counter += 1
+    @bbox_content.save
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Passed ' + @bbox_content.text }
+      format.json { head :no_content }
+    end
   end
 
   private
