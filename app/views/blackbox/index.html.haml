@@ -18,7 +18,7 @@
                         - contents(bbox).each do |content|
                             %li#list-group-item
                                 = content.text
-                                - if content.pass_counter == 0
+                                - if content.pass_counter == 0 && ! bbox.starred
                                     %small.new-content{style: 'color: green;'} new
                                 %div#btn-group
                                     - if ! bbox.starred
