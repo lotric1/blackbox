@@ -1,6 +1,6 @@
 class BboxContentsController < ApplicationController
   before_action :set_bbox_content, only: [:show, :edit, :update, :destroy, :pass, :flip_pinned, :flip_completed]
-  helper_method :contents
+  helper_method :contents, :boxes
 
   # GET /bbox_contents
   # GET /bbox_contents.json
@@ -61,8 +61,12 @@ class BboxContentsController < ApplicationController
     end
   end
 
-  def contents # to display on list of activities
-    return BboxContent.where(user_id: current_user.id).order(:completed, :bbox_id, :pinned, :next_date)
+  def boxes
+    return Bbox.where(user_id: current_user.id).order(:position)
+  end
+
+  def contents(bbox_id) # to display on list of activities
+    return BboxContent.where(user_id: current_user.id, bbox_id: bbox_id).order(:completed, :bbox_id, :pinned, :next_date)
   end
 
   def pass

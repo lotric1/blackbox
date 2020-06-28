@@ -1,41 +1,43 @@
 %p#notice= notice
 %h1 Bbox Contents
-%table
-  %thead
-    %tr
-      %th Text
-      %th Insertion date
-      %th Next date
-      %th Completion date
-      %th Due date
-      %th Completed
-      %th Pinned
-      %th Pass counter
-      %th Bbox
-      %th{:colspan => "3"}
-  %tbody
-    - contents.each do |bbox_content|
+- boxes.each do |bbox|
+  %h2= bbox.title
+  %table
+    %thead
       %tr
-        %td= bbox_content.text
-        %td= bbox_content.insertion_date
-        %td= bbox_content.next_date
-        %td= bbox_content.completion_date
-        %td= bbox_content.due_date
-        %td= bbox_content.completed
-        %td= bbox_content.pinned
-        %td= bbox_content.pass_counter
-        %td= bbox_content.bbox_id
-        - if bbox_content.completed
-          %td= button_to 'Remove completion', flip_completed_bbox_content_path(bbox_content), method: :post, class: 'btn'
-        - else
-          %td= button_to 'Complete', flip_completed_bbox_content_path(bbox_content), method: :post, class: 'btn'
-        %td= button_to 'Pass', pass_bbox_content_path(bbox_content), method: :post, class: 'btn'
-        - if bbox_content.pinned
-          %td= button_to 'Remove pin', flip_pinned_bbox_content_path(bbox_content), method: :post, class: 'btn'
-        - else
-          %td= button_to 'Pin', flip_pinned_bbox_content_path(bbox_content), method: :post, class: 'btn'
-        %td= link_to 'Show', bbox_content
-        %td= link_to 'Edit', edit_bbox_content_path(bbox_content)
-        %td= link_to 'Destroy', bbox_content, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Bbox Content', new_bbox_content_path
+        %th Text
+        %th Insertion date
+        %th Next date
+        %th Completion date
+        %th Due date
+        %th Completed
+        %th Pinned
+        %th Pass counter
+        %th Bbox
+        %th{:colspan => "3"}
+    %tbody
+      - contents(bbox.id).each do |bbox_content|
+        %tr
+          %td= bbox_content.text
+          %td= bbox_content.insertion_date
+          %td= bbox_content.next_date
+          %td= bbox_content.completion_date
+          %td= bbox_content.due_date
+          %td= bbox_content.completed
+          %td= bbox_content.pinned
+          %td= bbox_content.pass_counter
+          %td= bbox_content.bbox_id
+          - if bbox_content.completed
+            %td= button_to 'Remove completion', flip_completed_bbox_content_path(bbox_content), method: :post, class: 'btn'
+          - else
+            %td= button_to 'Complete', flip_completed_bbox_content_path(bbox_content), method: :post, class: 'btn'
+          %td= button_to 'Pass', pass_bbox_content_path(bbox_content), method: :post, class: 'btn'
+          - if bbox_content.pinned
+            %td= button_to 'Remove pin', flip_pinned_bbox_content_path(bbox_content), method: :post, class: 'btn'
+          - else
+            %td= button_to 'Pin', flip_pinned_bbox_content_path(bbox_content), method: :post, class: 'btn'
+          %td= link_to 'Show', bbox_content
+          %td= link_to 'Edit', edit_bbox_content_path(bbox_content)
+          %td= link_to 'Destroy', bbox_content, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  %div#form= render 'bbox_contents/form', bbox_id: bbox.id, bbox_content: BboxContent.new
