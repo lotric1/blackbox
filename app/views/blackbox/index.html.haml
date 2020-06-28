@@ -1,15 +1,25 @@
 %h1 Blackbox
 %p= link_to 'Activities', bbox_contents_path
+%p= link_to 'Boxes', bboxes_path
 %div#container
-    %div#card-group
+    %div#card-deck
         - @bboxes.each do |bbox|
             %div#card
-                %div#card-body
+                %div#card-header
                     %h5#card-title= bbox.title
+                    - if bbox.starred
+                        = button_to 'Remove Starred', flip_starred_bbox_path(bbox), method: :post, class: 'btn'
+                    - else
+                        = button_to 'Star', flip_starred_bbox_path(bbox), method: :post, class: 'btn'
+                %div#card-body
                     %ul#list-group.list-group-flush
                         - contents(bbox).each do |content|
                             %li#list-group-item= content.text
                             = button_to 'Pass', pass_bbox_content_path(content), method: :post, class: 'btn'
+                            - if content.pinned
+                                = button_to 'Remove pin', flip_pinned_bbox_content_path(content), method: :post, class: 'btn'
+                            - else
+                                = button_to 'Pinned', flip_pinned_bbox_content_path(content), method: :post, class: 'btn'
                         %div#form= render 'bbox_contents/form', bbox_id: bbox.id, bbox_content: BboxContent.new
                     #btn= link_to 'Edit', edit_bbox_path(bbox)
                     #btn= link_to 'Destroy', bbox, method: :delete, data: { confirm: 'Are you sure?' }

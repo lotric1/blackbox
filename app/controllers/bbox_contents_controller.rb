@@ -1,5 +1,5 @@
 class BboxContentsController < ApplicationController
-  before_action :set_bbox_content, only: [:show, :edit, :update, :destroy, :pass]
+  before_action :set_bbox_content, only: [:show, :edit, :update, :destroy, :pass, :flip_pinned]
   helper_method :contents
 
   # GET /bbox_contents
@@ -79,11 +79,16 @@ class BboxContentsController < ApplicationController
     n = [intervals.length - 1, @bbox_content.pass_counter].min
     @bbox_content.next_date += intervals[n] * 86400 # 86400 seconds = 1 day
     @bbox_content.pass_counter += 1
-    @bbox_content.save
+    @bbox_content.save()
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Passed ' + @bbox_content.text }
       format.json { head :no_content }
     end
+  end
+
+  def flip_pinned
+    @bbox_content.pinned = ! @bbox_content.pinned
+    @bbox_content.save()
   end
 
   private

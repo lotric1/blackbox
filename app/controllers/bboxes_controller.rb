@@ -1,5 +1,5 @@
 class BboxesController < ApplicationController
-  before_action :set_bbox, only: [:show, :edit, :update, :destroy]
+  before_action :set_bbox, only: [:show, :edit, :update, :destroy, :flip_starred]
 
   # GET /bboxes
   # GET /bboxes.json
@@ -63,6 +63,11 @@ class BboxesController < ApplicationController
       format.html { redirect_to bboxes_url, notice: 'Bbox was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def flip_starred
+    @bbox.starred = ! @bbox.starred
+    @bbox.save()
   end
 
   private

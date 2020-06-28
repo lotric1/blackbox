@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  resources :bboxes
+  resources :bboxes do
+    member do
+      post :flip_starred
+    end
+  end
   devise_for :users
   resources :bbox_contents do
     member do
       post :pass
+      post :flip_pinned
     end
   end
   root to: "blackbox#index"
